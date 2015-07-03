@@ -1,5 +1,8 @@
 # JSON Comment
 
+[![Build Status](https://travis-ci.org/bcho/json_comment.svg?branch=master)](https://travis-ci.org/bcho/json_comment)
+[![GoDoc](https://godoc.org/github.com/bcho/json_comment?status.svg)](https://godoc.org/github.com/bcho/json_comment)
+
 Strip comments from JSON input.
 
 
