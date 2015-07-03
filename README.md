@@ -32,6 +32,13 @@ Strip comments from JSON input.
 ]
 ```
 
+## Commandline Tool
+
+```bash
+$ go get github.com/bcho/json_comment/cmd/json_comment
+$ cat my_cool_json_file.json | json_comment
+```
+
 
 ## License
 
