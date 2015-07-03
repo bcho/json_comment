@@ -47,16 +47,16 @@ func IsLineBreak(char byte) bool {
 	return string(char) == SYM_LINE_BREAK
 }
 
-func IsSingleLineCommentSYM(char, peakChar byte) bool {
+func IsSingleLineComment(char, peakChar byte) bool {
 	sc := string(char)
 	return ((sc == SYM_HASH) || (sc+string(peakChar) == SYM_SLASH_SLASH))
 }
 
-func IsMultiLinesCommentStartsSym(char, peakChar byte) bool {
+func IsMultiLinesCommentStarts(char, peakChar byte) bool {
 	return string(char)+string(peakChar) == SYM_SLASH_STAR
 }
 
-func IsMultiLinesCommentEndsSym(char, peakChar byte) bool {
+func IsMultiLinesCommentEnds(char, peakChar byte) bool {
 	return string(char)+string(peakChar) == SYM_STAR_SLASH
 }
 
@@ -95,11 +95,11 @@ func (s *StrippedReader) Read(p []byte) (int, error) {
 
 			switch s.state {
 			case S_OTHER:
-				if IsSingleLineCommentSYM(char, peekChar) {
+				if IsSingleLineComment(char, peekChar) {
 					s.state = S_SL_COMMENT
 					continue // starts to skip comment
 				}
-				if IsMultiLinesCommentStartsSym(char, peekChar) {
+				if IsMultiLinesCommentStarts(char, peekChar) {
 					s.state = S_ML_COMMENT
 					continue // starts to skip comment
 				}
@@ -126,7 +126,7 @@ func (s *StrippedReader) Read(p []byte) (int, error) {
 					readLength = readLength + 1
 				}
 			case S_ML_COMMENT:
-				if IsMultiLinesCommentEndsSym(char, peekChar) {
+				if IsMultiLinesCommentEnds(char, peekChar) {
 					s.state = S_OTHER
 
 					i = i + 1 // skip peeked character
